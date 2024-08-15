@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoT.AppHost", "IoT\IoT.AppHost\IoT.AppHost.csproj", "{5DDCFAFB-22AA-48AF-953A-8FDFAAB22DEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoT.ServiceDefaults", "IoT\IoT.ServiceDefaults\IoT.ServiceDefaults.csproj", "{B8BD891B-5CEE-4855-BA79-5E3CE9578D89}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoT.DeviceManagementApi", "IoT.DeviceManagementApi\IoT.DeviceManagementApi.csproj", "{564303D3-02F6-4F76-9C36-536A16991DE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoT.AlertManagementApi", "IoT.AlertManagementApi\IoT.AlertManagementApi.csproj", "{CF184825-45CE-4AAD-8667-25CDF781B4EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoT.DeviceDataCollector", "IoT.DeviceDataCollector\IoT.DeviceDataCollector.csproj", "{FAA2C133-0807-43DA-83EC-3B585C031EEC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoT.AlertDispatcher", "IoT.AlertDispatcher\IoT.AlertDispatcher.csproj", "{5D02E8D8-7270-432A-BB4B-0AE797660144}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DDCFAFB-22AA-48AF-953A-8FDFAAB22DEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DDCFAFB-22AA-48AF-953A-8FDFAAB22DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DDCFAFB-22AA-48AF-953A-8FDFAAB22DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DDCFAFB-22AA-48AF-953A-8FDFAAB22DEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8BD891B-5CEE-4855-BA79-5E3CE9578D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8BD891B-5CEE-4855-BA79-5E3CE9578D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8BD891B-5CEE-4855-BA79-5E3CE9578D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8BD891B-5CEE-4855-BA79-5E3CE9578D89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564303D3-02F6-4F76-9C36-536A16991DE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564303D3-02F6-4F76-9C36-536A16991DE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564303D3-02F6-4F76-9C36-536A16991DE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564303D3-02F6-4F76-9C36-536A16991DE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF184825-45CE-4AAD-8667-25CDF781B4EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF184825-45CE-4AAD-8667-25CDF781B4EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF184825-45CE-4AAD-8667-25CDF781B4EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF184825-45CE-4AAD-8667-25CDF781B4EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA2C133-0807-43DA-83EC-3B585C031EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA2C133-0807-43DA-83EC-3B585C031EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA2C133-0807-43DA-83EC-3B585C031EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA2C133-0807-43DA-83EC-3B585C031EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D02E8D8-7270-432A-BB4B-0AE797660144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D02E8D8-7270-432A-BB4B-0AE797660144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D02E8D8-7270-432A-BB4B-0AE797660144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D02E8D8-7270-432A-BB4B-0AE797660144}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E74F4B9C-012D-4C7A-98CE-66DD43AD1789}
+	EndGlobalSection
+EndGlobal

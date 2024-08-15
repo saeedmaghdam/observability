@@ -1,7 +1,10 @@
 using IoT.AlertManagementApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
+using System.Diagnostics;
 using System.Text.Json;
+
+var activitySource = new ActivitySource("IoT.AlertManagementApi");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.AddRabbitMQClient("bus");
+
+builder.Services.AddElasticApmForAspNetCore();
 
 var app = builder.Build();
 
@@ -29,6 +34,11 @@ app.UseHttpsRedirection();
 
 app.MapPost("/", (AlertModel alert, [FromServices] IConnection connection) =>
 {
+    var activity = activitySource.StartActivity("PostMessage");
+    activity?.SetTag("DeviceId", alert.DeviceId);
+    activity?.SetTag("AlertType", alert.AlertType);
+    activity?.SetTag("Message", alert.Message);
+
     var queueName = "alerts";
     using var channel = connection.CreateModel();
     channel.QueueDeclare(queueName, exclusive: false, durable: true);

@@ -1,4 +1,5 @@
 using IoT.ServiceDefaults;
+using System.Diagnostics;
 using System.Net.Http.Json;
 
 namespace IoT.DeviceDataCollector;
@@ -7,6 +8,8 @@ public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
     private readonly IHttpClientFactory _clientFactory;
+
+    private readonly ActivitySource ActivitySource = new("IoT.DeviceDataCollector");
 
     public Worker(ILogger<Worker> logger, IHttpClientFactory clientFactory)
     {
@@ -23,10 +26,18 @@ public class Worker : BackgroundService
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
             var devices = await GetDevicesAsync();
+            var activity = ActivitySource.StartActivity("CollectData");
+
             foreach (var deviceId in devices)
             {
+                var sendDataActivity = ActivitySource.StartActivity("SendData");
+                sendDataActivity?.SetTag("DeviceId", deviceId);
+                sendDataActivity?.SetTag("Worker", "DeviceDataCollector");
+
                 await SendData(deviceId);
                 await DelayRandomly(500, 2500, stoppingToken);
+
+                sendDataActivity.Stop();
             }
         }
     }

@@ -6,6 +6,9 @@ builder.AddServiceDefaults();
 
 builder.AddRabbitMQClient("bus");
 
+builder.Services.AddAllElasticApm();
+builder.Services.AddHttpClient();
+
 builder.Services.AddHostedService<Worker>();
 
 var host = builder.Build();

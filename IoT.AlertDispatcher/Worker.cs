@@ -1,5 +1,6 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System.Diagnostics;
 using System.Text;
 
 namespace IoT.AlertDispatcher;
@@ -8,6 +9,8 @@ public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
     private readonly IModel _channel;
+
+    private readonly ActivitySource ActivitySource = new("IoT.AlertDispatcher");
 
     private const string _queueName = "alerts";
 
@@ -24,6 +27,9 @@ public class Worker : BackgroundService
         var consumer = new EventingBasicConsumer(_channel);
         consumer.Received += (ch, ea) =>
         {
+            var activity = ActivitySource.StartActivity("ProcessAlert");
+            activity?.SetTag("Alert", Encoding.UTF8.GetString(ea.Body.ToArray()));
+
             var body = ea.Body.ToArray();
             _logger.LogInformation("Received: {Alert}", Encoding.UTF8.GetString(body));
 

@@ -673,3 +673,5 @@ tools/gulp-tasks/cldr/cldr-data/
 
 .sonarqube
 .scannerwork
+
+appsettings.Development.json

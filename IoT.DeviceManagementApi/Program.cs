@@ -1,3 +1,5 @@
+using Elastic.Apm.AspNetCore;
+using Elastic.Apm.DiagnosticSource;
 using IoT.DeviceManagementApi.Models;
 using IoT.ServiceDefaults;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +21,7 @@ builder.Services.AddHttpClient(IoTServices.AlertManagementApi.ToString(), c => c
 
 builder.AddRedisClient("db");
 
-builder.Services.AddElasticApmForAspNetCore();
+builder.Services.AddElasticApmForAspNetCore(new HttpDiagnosticsSubscriber());
 
 var app = builder.Build();
 

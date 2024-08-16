@@ -1,3 +1,4 @@
+using Elastic.Apm.DiagnosticSource;
 using IoT.DeviceDataCollector;
 using IoT.ServiceDefaults;
 
@@ -7,7 +8,7 @@ builder.AddServiceDefaults();
 
 builder.Services.AddHttpClient(IoTServices.DeviceManagementApi.ToString(), c => c.BaseAddress = new Uri($"https://{IoTServices.DeviceManagementApi.ToUniqueId()}"));
 
-builder.Services.AddAllElasticApm();
+builder.Services.AddElasticApm(new HttpDiagnosticsSubscriber());
 builder.Services.AddHttpClient();
 
 builder.Services.AddHostedService<Worker>();

@@ -1,3 +1,4 @@
+using Elastic.Apm.Api;
 using IoT.ServiceDefaults;
 using System.Diagnostics;
 using System.Net.Http.Json;
@@ -8,13 +9,15 @@ public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
     private readonly IHttpClientFactory _clientFactory;
+    private readonly ITracer _tracer;
 
     private readonly ActivitySource ActivitySource = new("IoT.DeviceDataCollector");
 
-    public Worker(ILogger<Worker> logger, IHttpClientFactory clientFactory)
+    public Worker(ILogger<Worker> logger, IHttpClientFactory clientFactory, ITracer tracer)
     {
         _logger = logger;
         _clientFactory = clientFactory;
+        _tracer = tracer;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -26,19 +29,27 @@ public class Worker : BackgroundService
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
             var devices = await GetDevicesAsync();
-            var activity = ActivitySource.StartActivity("CollectData");
+            using var activity = ActivitySource.StartActivity("CollectData", ActivityKind.Server);
+            activity!.SetTag("span.type", "TEST3");
 
+            //var transaction = _tracer.CurrentTransaction.StartSpan("CollectData", "Worker");
+            //var span = transaction.StartSpan("GetDevices", "DeviceDataCollector");
             foreach (var deviceId in devices)
             {
-                var sendDataActivity = ActivitySource.StartActivity("SendData");
+                //var span2 = transaction.StartSpan("SendData", "DeviceDataCollector");
+                using var sendDataActivity = ActivitySource.StartActivity("SendData");
                 sendDataActivity?.SetTag("DeviceId", deviceId);
                 sendDataActivity?.SetTag("Worker", "DeviceDataCollector");
 
                 await SendData(deviceId);
                 await DelayRandomly(500, 2500, stoppingToken);
 
-                sendDataActivity.Stop();
+                //sendDataActivity.Stop();
+                //span2.End();
             }
+
+            //span.End();
+            //transaction.End();
         }
     }
 

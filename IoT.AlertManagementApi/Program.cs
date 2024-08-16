@@ -1,3 +1,4 @@
+using Elastic.Apm.DiagnosticSource;
 using IoT.AlertManagementApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
@@ -17,7 +18,7 @@ builder.Services.AddSwaggerGen();
 
 builder.AddRabbitMQClient("bus");
 
-builder.Services.AddElasticApmForAspNetCore();
+builder.Services.AddElasticApmForAspNetCore(new HttpDiagnosticsSubscriber());
 
 var app = builder.Build();
 
